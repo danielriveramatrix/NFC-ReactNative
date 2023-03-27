@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2330AFEA29D200FC00D707F2 /* NFCReaderModule in Frameworks */ = {isa = PBXBuildFile; productRef = 2330AFE929D200FC00D707F2 /* NFCReaderModule */; };
 		7699B88040F8A987B510C191 /* libPods-NFC-NFCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-NFC-NFCTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-NFC.a in Frameworks */,
+				2330AFEA29D200FC00D707F2 /* NFCReaderModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +192,9 @@
 			dependencies = (
 			);
 			name = NFC;
+			packageProductDependencies = (
+				2330AFE929D200FC00D707F2 /* NFCReaderModule */,
+			);
 			productName = NFC;
 			productReference = 13B07F961A680F5B00A75B9A /* NFC.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +225,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				2330AFE829D200FC00D707F2 /* XCRemoteSwiftPackageReference "nfc_reader_module" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,6 +707,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2330AFE829D200FC00D707F2 /* XCRemoteSwiftPackageReference "nfc_reader_module" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ronaldvelasquezmatrix/nfc_reader_module.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2330AFE929D200FC00D707F2 /* NFCReaderModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2330AFE829D200FC00D707F2 /* XCRemoteSwiftPackageReference "nfc_reader_module" */;
+			productName = NFCReaderModule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "nfc_reader_module",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronaldvelasquezmatrix/nfc_reader_module.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a04160508c33afaf2ca05d457d583973da1e5ea8"
+      }
+    }
+  ],
+  "version" : 2
+}
