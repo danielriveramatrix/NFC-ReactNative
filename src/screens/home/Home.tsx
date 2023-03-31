@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-import NFCReaderViewModel from '../../models/NFCReaderViewModel';
+// import NFCReaderViewModel from '../../models/NFCReaderViewModel';
 import NFCReaderView from '../../components/NFCReaderView';
 
 const HomeScreen: React.FC = () => {
@@ -18,7 +18,7 @@ const HomeScreen: React.FC = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const nfcReaderViewModel = new NFCReaderViewModel();
+  // const nfcReaderViewModel = new NFCReaderViewModel();
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -32,7 +32,7 @@ const HomeScreen: React.FC = () => {
         <Header />
         <View style={styles.body}>
           <View style={styles.sectionContainer}>
-            <NFCReaderView viewModel={nfcReaderViewModel} />
+            <NFCReaderView/>
           </View>
         </View>
       </ScrollView>
