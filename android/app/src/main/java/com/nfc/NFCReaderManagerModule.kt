@@ -53,12 +53,12 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
                 }
             }
         }
-        currentActivity?.let { nfcReaderManager?.disableInForeground(it) }
+        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
     }
 
     @ReactMethod
     fun closeReader() {
-        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
+        currentActivity?.let { nfcReaderManager?.disableInForeground(it) }
         nfcReaderManager?.destroy()
         nfcReaderManager = null
     }
