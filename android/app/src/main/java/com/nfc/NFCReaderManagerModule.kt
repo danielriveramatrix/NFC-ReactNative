@@ -24,27 +24,27 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
     private var nfcReaderManager: NFCReaderManager? = null
 
     @ReactMethod
-    fun readTag(gotNFCData: GotNFCData) {
+    fun readTag(gotNFCData: GotNFCResponse) {
         nfcReaderManager = NFCReaderManager
         currentActivity?.let { nfcReaderManager?.readNFC(it) { adapter, result ->
             when (result) {
                 is NFCResponse.Success -> {
                     Log.d("NFC READER", result.successData)
-                    gotNFCData(adapter, NFCResponse.Success(result.successData))
+                    gotNFCData.nfcResponse(NFCResponse.Success(result.successData))
 
                 }
                 is NFCResponse.NotRead -> {
                     Log.d("NFC READER", "NotRead")
-                    gotNFCData(adapter, NFCResponse.NotRead)
+                    gotNFCData.nfcResponse(NFCResponse.NotRead)
                 }
                 is NFCResponse.Unavailable -> {
                     Log.d("NFC READER", "Unavailable")
-                    gotNFCData(adapter, NFCResponse.Unavailable)
+                    gotNFCData.nfcResponse(NFCResponse.Unavailable)
                     nfcReaderManager?.destroy()
                 }
                 is NFCResponse.InvalidateError -> {
                     Log.d("NFC READER", "InvalidateError")
-                    gotNFCData(adapter, NFCResponse.InvalidateError(result.message))
+                    gotNFCData.nfcResponse(NFCResponse.InvalidateError(result.message))
                 }
             }
             }
