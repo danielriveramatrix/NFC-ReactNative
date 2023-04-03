@@ -3,6 +3,7 @@ package com.nfc
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.nfc.NfcAdapter
 import android.util.Log
 import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.Callback
@@ -13,6 +14,7 @@ import com.facebook.react.bridge.ReactMethod
 import com.matrix.nfcreader.GotNFCData
 import com.matrix.nfcreader.NFCReaderManager
 import com.matrix.nfcreader.NFCResponse
+import com.matrix.nfcreader.NFCUtil
 
 class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext), ActivityEventListener, LifecycleEventListener {
@@ -24,44 +26,15 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
     override fun getName(): String = "NFCReaderManagerModule"
     private var nfcReaderManager: NFCReaderManager? = null
 
-//    @ReactMethod
-//    fun readTag(gotNFCData: GotNFCResponse) {
-//        nfcReaderManager = NFCReaderManager
-//        currentActivity?.let { nfcReaderManager?.readNFC(it) { adapter, result ->
-//            when (result) {
-//                is NFCResponse.Success -> {
-//                    Log.d("NFC READER", result.successData)
-//                    gotNFCData.nfcResponse(NFCResponse.Success(result.successData))
-//
-//                }
-//                is NFCResponse.NotRead -> {
-//                    Log.d("NFC READER", "NotRead")
-//                    gotNFCData.nfcResponse(NFCResponse.NotRead)
-//                }
-//                is NFCResponse.Unavailable -> {
-//                    Log.d("NFC READER", "Unavailable")
-//                    gotNFCData.nfcResponse(NFCResponse.Unavailable)
-//                    nfcReaderManager?.destroy()
-//                }
-//                is NFCResponse.InvalidateError -> {
-//                    Log.d("NFC READER", "InvalidateError")
-//                    gotNFCData.nfcResponse(NFCResponse.InvalidateError(result.message))
-//                }
-//            }
-//            }
-//        }
-//        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
-//    }
-
     @ReactMethod
     fun readTag(callback: Callback) {
-        nfcReaderManager = NFCReaderManager
+        if (nfcReaderManager == null) nfcReaderManager = NFCReaderManager
         currentActivity?.let { nfcReaderManager?.readNFC(it) { adapter, result ->
             when (result) {
                 is NFCResponse.Success -> {
                     Log.d("NFC READER", result.successData)
                     callback.invoke("SUCCESS", result.successData)
-
+                    currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
                 }
                 is NFCResponse.NotRead -> {
                     Log.d("NFC READER", "NotRead")
@@ -80,6 +53,22 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
         }
         }
         currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
+    }
+
+    @ReactMethod
+    fun closeReader() {
+        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
+        nfcReaderManager?.destroy()
+        nfcReaderManager = null
+    }
+
+    @ReactMethod
+    fun isAvailableNFCReader(callback: Callback) {
+        currentActivity?.let {
+            callback.invoke(NFCUtil.isNFCEnable(NfcAdapter.getDefaultAdapter(currentActivity)))
+        } ?: kotlin.run {
+            callback.invoke(false)
+        }
     }
 
     override fun onActivityResult(p0: Activity?, p1: Int, p2: Int, p3: Intent?) {
