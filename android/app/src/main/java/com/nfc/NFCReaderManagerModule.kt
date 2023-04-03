@@ -23,36 +23,37 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
         reactContext.addActivityEventListener(this)
         reactContext.addLifecycleEventListener(this)
     }
+
     override fun getName(): String = "NFCReaderManagerModule"
     private var nfcReaderManager: NFCReaderManager? = null
 
     @ReactMethod
     fun readTag(callback: Callback) {
         if (nfcReaderManager == null) nfcReaderManager = NFCReaderManager
-        currentActivity?.let { nfcReaderManager?.readNFC(it) { adapter, result ->
-            when (result) {
-                is NFCResponse.Success -> {
-                    Log.d("NFC READER", result.successData)
-                    callback.invoke("SUCCESS", result.successData)
-                    currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
-                }
-                is NFCResponse.NotRead -> {
-                    Log.d("NFC READER", "NotRead")
-                    callback.invoke("NOT_READ", null)
-                }
-                is NFCResponse.Unavailable -> {
-                    Log.d("NFC READER", "Unavailable")
-                    callback.invoke("UNAVAILABLE", null)
-                    nfcReaderManager?.destroy()
-                }
-                is NFCResponse.InvalidateError -> {
-                    Log.d("NFC READER", "InvalidateError")
-                    callback.invoke("INVALIDATE_ERROR", result.message)
+        currentActivity?.let {
+            nfcReaderManager?.readNFC(it) { adapter, result ->
+                when (result) {
+                    is NFCResponse.Success -> {
+                        Log.d("NFC READER", result.successData)
+                        callback.invoke("SUCCESS", result.successData)
+                    }
+                    is NFCResponse.NotRead -> {
+                        Log.d("NFC READER", "NotRead")
+                        callback.invoke("NOT_READ", null)
+                    }
+                    is NFCResponse.Unavailable -> {
+                        Log.d("NFC READER", "Unavailable")
+                        callback.invoke("UNAVAILABLE", null)
+                        nfcReaderManager?.destroy()
+                    }
+                    is NFCResponse.InvalidateError -> {
+                        Log.d("NFC READER", "InvalidateError")
+                        callback.invoke("INVALIDATE_ERROR", result.message)
+                    }
                 }
             }
         }
-        }
-        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
+        currentActivity?.let { nfcReaderManager?.disableInForeground(it) }
     }
 
     @ReactMethod
@@ -86,7 +87,7 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
     }
 
     override fun onHostPause() {
-        currentActivity?.let { nfcReaderManager?.enableInForeground(it) }
+        currentActivity?.let { nfcReaderManager?.disableInForeground(it) }
     }
 
     override fun onHostDestroy() {
