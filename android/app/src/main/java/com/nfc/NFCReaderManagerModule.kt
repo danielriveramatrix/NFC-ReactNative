@@ -60,21 +60,21 @@ class NFCReaderManagerModule(reactContext: ReactApplicationContext) :
             when (result) {
                 is NFCResponse.Success -> {
                     Log.d("NFC READER", result.successData)
-                    callback.invoke(NFCResponse.Success(result.successData))
+                    callback.invoke("SUCCESS", result.successData)
 
                 }
                 is NFCResponse.NotRead -> {
                     Log.d("NFC READER", "NotRead")
-                    callback.invoke(NFCResponse.NotRead)
+                    callback.invoke("NOT_READ", null)
                 }
                 is NFCResponse.Unavailable -> {
                     Log.d("NFC READER", "Unavailable")
-                    callback.invoke(NFCResponse.Unavailable)
+                    callback.invoke("UNAVAILABLE", null)
                     nfcReaderManager?.destroy()
                 }
                 is NFCResponse.InvalidateError -> {
                     Log.d("NFC READER", "InvalidateError")
-                    callback.invoke(NFCResponse.InvalidateError(result.message))
+                    callback.invoke("INVALIDATE_ERROR", result.message)
                 }
             }
         }
