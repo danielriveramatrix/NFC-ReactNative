@@ -12,4 +12,6 @@
 @interface RCT_EXTERN_MODULE(NFCManager, NSObject)
 RCT_EXTERN_METHOD(readTag:
                   (RCTResponseSenderBlock) callback)
+RCT_EXTERN_METHOD(isAvailableNFCReader:
+                  (RCTResponseSenderBlock) callback)
 @end

@@ -7,6 +7,7 @@
 
 import Foundation
 import NFCReaderModule
+import CoreNFC
 
 
 @objc(NFCManager)
@@ -27,7 +28,7 @@ class NFCManager: NSObject{
         DispatchQueue.main.async {
           callback(["SUCCESS", message ?? ""])
         }
-
+        
       case .failure(_):
         DispatchQueue.main.async {
           callback(["ERROR", "error"])
@@ -37,4 +38,12 @@ class NFCManager: NSObject{
     })
   }
   
+  @objc
+  public func isAvailableNFCReader(callback: RCTResponseSenderBlock) {
+    guard NFCNDEFReaderSession.readingAvailable else {
+      callback([false])
+      return
+    }
+    callback([true])
+  }
 }

@@ -33,7 +33,7 @@ import ControllingAnimationProgress from '../screens/lottie/Lottie';
 
 const NFCReaderManagerModule = Platform.select({
   android: NativeModules.NFCReaderManagerModule,
-  ios: NativeModules.NFCReaderManagerModule,
+  ios: NativeModules.NFCManager,
 });
 
 const NFCReaderViewModel = () => {
