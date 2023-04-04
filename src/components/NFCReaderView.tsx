@@ -28,10 +28,13 @@
 // //Got unknown argument class: GotNFCResponse
 
 import React, {useState} from 'react';
-import {View, Text, Button, NativeModules} from 'react-native';
+import {View, Text, Button, NativeModules, Platform} from 'react-native';
 import ControllingAnimationProgress from '../screens/lottie/Lottie';
 
-const {NFCReaderManagerModule} = NativeModules;
+const NFCReaderManagerModule = Platform.select({
+  android: NativeModules.NFCReaderManagerModule,
+  ios: NativeModules.NFCReaderManagerModule,
+});
 
 const NFCReaderViewModel = () => {
   const [nfcAvailable, setNfcAvailable] = useState(false);
