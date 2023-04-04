@@ -10,15 +10,15 @@ import NFCReaderModule
 import CoreNFC
 
 
-@objc(NFCManager)
-class NFCManager: NSObject{
+@objc(NFCReaderManagerModule)
+class NFCReaderManagerModule: NSObject{
   private var manager: NFCReaderManager?
   
   @objc
   static func requiresMainQueueSetup() -> Bool { return true}
   
   @objc
-  public func readTag(callback: @escaping RCTResponseSenderBlock) {
+  public func readTag(_ callback: @escaping RCTResponseSenderBlock) {
     if manager == nil {
       manager = NFCReaderManager()
     }
@@ -39,7 +39,7 @@ class NFCManager: NSObject{
   }
   
   @objc
-  public func isAvailableNFCReader(callback: RCTResponseSenderBlock) {
+  public func isAvailableNFCReader(_ callback: RCTResponseSenderBlock) {
     guard NFCNDEFReaderSession.readingAvailable else {
       callback([false])
       return

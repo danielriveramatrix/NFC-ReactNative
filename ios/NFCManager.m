@@ -9,9 +9,9 @@
 
 #import "React/RCTBridgeModule.h"
 
-@interface RCT_EXTERN_MODULE(NFCManager, NSObject)
+@interface RCT_EXTERN_MODULE(NFCReaderManagerModule, NSObject)
 RCT_EXTERN_METHOD(readTag:
-                  (RCTResponseSenderBlock) callback)
+                  (RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(isAvailableNFCReader:
-                  (RCTResponseSenderBlock) callback)
+                  (RCTResponseSenderBlock)callback)
 @end

@@ -4,9 +4,10 @@ import {NFC_READ_STATES} from '../../../Utils/constants/constants';
 
 const NFCReaderManagerModule = Platform.select({
   android: NativeModules.NFCReaderManagerModule,
-  ios: NativeModules.NFCManager,
+  ios: NativeModules.NFCReaderManagerModule,
 });
 
+console.log(NFCReaderManagerModule.NFCReaderManagerModule)
 const useNFCReader = () => {
   const [nfcAvailable, setNfcAvailable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
