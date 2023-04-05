@@ -16,7 +16,7 @@ const RoundedButton = ({onPress, text}: Props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#ff961f',
+    backgroundColor: '#000000',
     borderRadius: 8,
     padding: 16,
     width: '50%',
