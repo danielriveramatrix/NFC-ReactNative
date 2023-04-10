@@ -25,7 +25,7 @@ const Home = () => {
         backgroundColor: 'white',
         padding: 16,
       }}>
-      {isLoading ? (
+      {isLoading && Platform.OS === 'android' ? (
         <ControllingAnimationProgress />
       ) : (
         <>
