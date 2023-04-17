@@ -29,9 +29,20 @@ class NFCReaderManagerModule: NSObject{
           callback(["SUCCESS", message ?? ""])
         }
         
-      case .failure(_):
+      case .failure(let error):
+        var errorData = ""
+        switch(error) {
+        case NFCReaderManagerError.unavailable:
+          errorData = "Unavailable"
+        case .notSupported:
+          errorData = "notSupported"
+        case .invalidated(errorDescription: let errorDescription):
+          errorData = errorDescription
+        case .generic:
+          errorData = "Generic"
+        }
         DispatchQueue.main.async {
-          callback(["ERROR", "error"])
+          callback(["ERROR", errorData])
         }
       }
       
