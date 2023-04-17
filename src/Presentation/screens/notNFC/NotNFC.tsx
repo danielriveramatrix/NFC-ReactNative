@@ -1,11 +1,17 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import RoundedButton from '../../components/RoundedButton';
 
-const NotNFC = () => {
+interface Props {
+  readNFC: () => void;
+}
+
+const NotNFC = ({readNFC}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>No Tiene NFC</Text>
       <Text style={styles.subtitle}>Tu dispositivo no tiene NFC.</Text>
+      <RoundedButton onPress={readNFC} text="Leer NFC" />
 
       <View
         style={{

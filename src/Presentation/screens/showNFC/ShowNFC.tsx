@@ -4,13 +4,15 @@ import RoundedButton from '../../components/RoundedButton';
 
 interface Props {
   data: string;
+  readNFC: () => void;
 }
 
-const ShowNFC = ({data}: Props) => {
+const ShowNFC = ({data, readNFC}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>BCP App</Text>
       <Text style={styles.subtitle}>{data}</Text>
+      <RoundedButton onPress={readNFC} text="Leer NFC" />
 
       <View
         style={{

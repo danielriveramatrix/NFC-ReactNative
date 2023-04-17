@@ -30,8 +30,10 @@ const Home = () => {
       ) : (
         <>
           {nfcAvailable && <YesNFC readNFC={readNFC} />}
-          {!nfcAvailable && <NotNFC />}
-          {showState === NFC_READ_STATES.SUCCESS && <ShowNFC data={showData} />}
+          {!nfcAvailable && <NotNFC readNFC={readNFC} />}
+          {showState === NFC_READ_STATES.SUCCESS && (
+            <ShowNFC data={showData} readNFC={readNFC} />
+          )}
         </>
       )}
     </View>
