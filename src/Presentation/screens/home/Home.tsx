@@ -12,10 +12,6 @@ const Home = () => {
   const {nfcAvailable, isLoading, readNFC, showState, showData} =
     useNFCReader();
 
-  useEffect(() => {
-    console.log('showNFC', showState);
-  });
-
   return (
     <View
       style={{
