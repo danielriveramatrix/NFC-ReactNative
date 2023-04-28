@@ -26,7 +26,8 @@ target 'NFC' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
-
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.
@@ -42,7 +43,7 @@ target 'NFC' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
+ 
   target 'NFCTests' do
     inherit! :complete
     # Pods for testing
@@ -56,5 +57,12 @@ target 'NFC' do
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    installer.pods_project.targets.each do |target|
+      if target.name == "React-Codegen"
+        target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.4'
+        end
+      end
+    end
   end
 end
