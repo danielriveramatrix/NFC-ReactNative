@@ -7,7 +7,6 @@ const NFCReaderManagerModule = Platform.select({
   ios: NativeModules.NFCReaderManagerModule,
 });
 
-console.log(NFCReaderManagerModule.NFCReaderManagerModule)
 const useNFCReader = () => {
   const [nfcAvailable, setNfcAvailable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +16,6 @@ const useNFCReader = () => {
   const checkNFCReaderAvailability = () => {
     setIsLoading(true);
     NFCReaderManagerModule.isAvailableNFCReader((res: any) => {
-      console.log('isAvailableNFCReader', res);
       setNfcAvailable(res);
       setIsLoading(false);
     });
@@ -28,8 +26,6 @@ const useNFCReader = () => {
     setShowData('');
     setShowState('');
     NFCReaderManagerModule.readTag((status: any, response: any) => {
-      console.log('status', status);
-      console.log('response', response);
       switch (status) {
         case NFC_READ_STATES.SUCCESS:
           setShowData(`La lectura de NFC fue exitosa: ${response}`);
