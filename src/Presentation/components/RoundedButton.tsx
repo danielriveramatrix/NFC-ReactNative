@@ -4,11 +4,20 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 interface Props {
   onPress: () => void;
   text: string;
+  disabled?: boolean;
 }
 
-const RoundedButton = ({onPress, text}: Props) => {
+const RoundedButton = ({onPress, text, disabled = false}: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {
+          backgroundColor: disabled ? '#CCCCCC' : '#000000',
+        },
+      ]}
+      disabled={disabled}
+      onPress={onPress}>
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );

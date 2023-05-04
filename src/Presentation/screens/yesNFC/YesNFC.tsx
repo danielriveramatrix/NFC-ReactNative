@@ -11,7 +11,7 @@ const YesNFC = ({readNFC}: Props) => {
     <View style={styles.container}>
       <Image source={require('../../assets/logo-io.png')} />
       <Text style={styles.title}>Matrix</Text>
-      <Text style={styles.title}>El NFC está disponible</Text>
+      <Text style={styles.title}>NFC Habilitado</Text>
       <RoundedButton onPress={readNFC} text="Leer NFC" />
     </View>
   );

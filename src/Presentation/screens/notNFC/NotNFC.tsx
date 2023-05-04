@@ -11,9 +11,11 @@ const NotNFC = ({readNFC}: Props) => {
     <View style={styles.container}>
       <Image source={require('../../assets/logo-io.png')} />
       <Text style={styles.title}>Matrix</Text>
-      <Text style={styles.title}>No Tiene NFC</Text>
-      <Text style={styles.subtitle}>Tu dispositivo no tiene NFC.</Text>
-      <RoundedButton onPress={readNFC} text="Leer NFC" />
+      <Text style={styles.title}>Problema con NFC</Text>
+      <Text style={styles.subtitle}>
+        Por favor, sal de la aplicación, activa el NFC y vuelve a ingresar.
+      </Text>
+      <RoundedButton disabled={true} onPress={readNFC} text="Leer NFC" />
     </View>
   );
 };
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
   },
   title: {
     fontWeight: 'bold',
